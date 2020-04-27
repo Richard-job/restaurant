@@ -14,7 +14,9 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        $tables = Table::all();
+        
+        return view('table.index',compact('tables'));
     }
 
     /**
@@ -24,7 +26,7 @@ class TableController extends Controller
      */
     public function create()
     {
-        //
+        return view('table.create');
     }
 
     /**
@@ -35,7 +37,12 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Table::create([
+            'number' => $request->number,
+            'amount_people' => $request->amount_people,
+        ])->save();
+        
+        return redirect()->route('table.create');
     }
 
     /**
@@ -46,7 +53,9 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        //
+        $table = Table::firstWhere('id', $$table->id);
+        
+        return view('table.show',compact('table'));
     }
 
     /**
@@ -57,7 +66,9 @@ class TableController extends Controller
      */
     public function edit(Table $table)
     {
-        //
+        $table = Table::firstWhere('id', $table->id);
+        
+        return view('table.edit',compact('table'));
     }
 
     /**
@@ -69,7 +80,14 @@ class TableController extends Controller
      */
     public function update(Request $request, Table $table)
     {
-        //
+        $table = Table::firstWhere('id', $table->id);
+        $table->update([
+            'number' => $request->number,
+            'amount_people' => $request->amount_people,
+        ]);
+        
+        $table = Table::firstWhere('id', $table->id);
+        return redirect()->route('table.show', 'table');
     }
 
     /**
@@ -80,6 +98,9 @@ class TableController extends Controller
      */
     public function destroy(Table $table)
     {
-        //
+        $table = Table::firstWhere('id', $table->id);
+        $table->delete();
+        
+        return redirect()->route('table.index');
     }
 }
