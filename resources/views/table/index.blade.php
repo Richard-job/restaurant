@@ -4,7 +4,7 @@
 
     <table>
         <tr>
-            <th>Number:</th>
+            <th>Number</th>
             <th>Amount People</th>
             <th>Is Used</th>
         </tr>

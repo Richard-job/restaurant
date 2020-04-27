@@ -44,7 +44,7 @@ class TableController extends Controller
         ])->save();
         
         Alert::success('Success', 'Table added successfully');
-        return redirect()->route('table.create');
+        return redirect()->route('tables.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        $table = Table::firstWhere('id', $$table->id);
+        $table = Table::firstWhere('id', $table->id);
         
         return view('table.show',compact('table'));
     }
@@ -90,7 +90,7 @@ class TableController extends Controller
         
         Alert::success('Success', 'Table adited successfully');
         $table = Table::firstWhere('id', $table->id);
-        return redirect()->route('table.show', 'table');
+        return redirect()->route('tables.show', 'table');
     }
 
     /**
@@ -105,6 +105,6 @@ class TableController extends Controller
         $table->delete();
         
         Alert::success('Success', ' deleted successfully');
-        return redirect()->route('table.index');
+        return redirect()->route('tables.index');
     }
 }
