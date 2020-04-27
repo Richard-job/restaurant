@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Table;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TableController extends Controller
 {
@@ -42,6 +43,7 @@ class TableController extends Controller
             'amount_people' => $request->amount_people,
         ])->save();
         
+        Alert::success('Success', 'Table added successfully');
         return redirect()->route('table.create');
     }
 
@@ -86,6 +88,7 @@ class TableController extends Controller
             'amount_people' => $request->amount_people,
         ]);
         
+        Alert::success('Success', 'Table adited successfully');
         $table = Table::firstWhere('id', $table->id);
         return redirect()->route('table.show', 'table');
     }
@@ -101,6 +104,7 @@ class TableController extends Controller
         $table = Table::firstWhere('id', $table->id);
         $table->delete();
         
+        Alert::success('Success', ' deleted successfully');
         return redirect()->route('table.index');
     }
 }
